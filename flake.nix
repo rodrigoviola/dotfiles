@@ -25,6 +25,10 @@
         homebrew = {
           enable = true;
 
+          taps = [
+            "hashicorp/tap"
+          ];
+
           brews = [
             "aria2"
             "aws-vault"
@@ -41,18 +45,19 @@
             "gnu-sed"
             "gnu-tar"
             "gnupg"
+            "hashicorp/tap/terraform"
             "helm"
             "helmfile"
             "htop"
             "hugo"
             "jq"
             "k9s"
-            "lazydocker"
-            "lazygit"
             "krew"
             "kubectx"
             "kubernetes-cli"
             "kustomize"
+            "lazydocker"
+            "lazygit"
             "neofetch"
             "neovim"
             "nmap"
@@ -61,7 +66,6 @@
             "pwgen"
             "ripgrep"
             "telnet"
-            "terraform"
             "tmux"
             "tree"
             "watch"
@@ -82,15 +86,14 @@
             "docker"
             "drawio"
             "firefox"
+            "focus"
             "font-ibm-plex"
             "font-meslo-lg-nerd-font"
-            "focus"
             "google-chrome"
             "iterm2"
             "keepingyouawake"
             "keyboardcleantool"
             "libreoffice"
-            # "mactex" used for cv.pdf, to be replaced with xu-cheng/latex-docker            
             "microsoft-onenote"
             "microsoft-remote-desktop"
             "notion"
@@ -105,6 +108,7 @@
             "visual-studio-code"
             "vmware-fusion"
             "whatsapp"
+            # "mactex" used for cv.pdf, to be replaced with xu-cheng/latex-docker            
           ];
 
           onActivation.cleanup = "zap";
