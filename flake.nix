@@ -139,9 +139,13 @@
             done
           '';
 
-        system.defaults = {
-          dock.autohide = true;
-        };
+        # Configure OS settings -- Check some available options at https://mynixos.com/nix-darwin/options
+        system.defaults.dock.autohide = true;
+        system.defaults.NSGlobalDomain.InitialKeyRepeat = 15; # Short
+        system.defaults.NSGlobalDomain.KeyRepeat = 2; # Fast
+        system.keyboard.enableKeyMapping = true;
+        system.keyboard.swapLeftCtrlAndFn = true;
+        time.timeZone = "America/Asuncion";
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
