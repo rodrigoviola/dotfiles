@@ -61,17 +61,21 @@
             "neofetch"
             "neovim"
             "nmap"
+            "oh-my-posh"
             "openconnect"
             "p7zip"
             "pwgen"
             "ripgrep"
+            "stow"
             "telnet"
             "tmux"
+            "tpm"
             "tree"
             "watch"
             "wget"
             "yq"
             "yt-dlp"
+            #"mas"
           ];
 
           casks = [
@@ -87,6 +91,7 @@
             "drawio"
             "firefox"
             "focus"
+            "font-blex-mono-nerd-font" # Nerd font version of IBM Plex
             "font-ibm-plex"
             "font-meslo-lg-nerd-font"
             "google-chrome"
@@ -108,43 +113,70 @@
             "visual-studio-code"
             "vmware-fusion"
             "whatsapp"
-            # "mactex" used for cv.pdf, to be replaced with xu-cheng/latex-docker            
+            # "mactex" Used for cv.pdf, to be replaced with xu-cheng/latex-docker            
           ];
 
-          onActivation.cleanup = "zap";
+          # masApps = {
+          #   "Dark Mode for Safari" = 1397180934;
+          #   "Kindle" = 302584613;
+          #   "MindNode" = 1289197285;
+          #   "Tabs Switcher" = 1406718335;
+          #   "Wipr" = 1320666476;
+          # };
+
+          onActivation = {
+            autoUpdate = false;
+            cleanup = "zap";
+          };
         };
 
-        fonts.packages = [
-          (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-        ];
+        # fonts.packages = [
+        #   (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        # ];
 
-        system.activationScripts.applications.text =
-          let
-            env = pkgs.buildEnv {
-              name = "system-applications";
-              paths = config.environment.systemPackages;
-              pathsToLink = "/Applications";
-            };
-          in
-          pkgs.lib.mkForce ''
-            # Set up applications.
-            echo "setting up /Applications..." >&2
-            rm -rf /Applications/Nix\ Apps
-            mkdir -p /Applications/Nix\ Apps
-            find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-            while read src; do
-              app_name=$(basename "$src")
-              echo "copying $src" >&2
-              ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-            done
-          '';
+        # Enable TouchID for sudo authentication
+        security.pam.enableSudoTouchIdAuth = true;
 
-        # Configure OS settings -- Check some available options at https://mynixos.com/nix-darwin/options
+        # system.activationScripts.applications.text =
+        #   let
+        #     env = pkgs.buildEnv {
+        #       name = "system-applications";
+        #       paths = config.environment.systemPackages;
+        #       pathsToLink = "/Applications";
+        #     };
+        #   in
+        #   pkgs.lib.mkForce ''
+        #     # Set up applications.
+        #     echo "setting up /Applications..." >&2
+        #     rm -rf /Applications/Nix\ Apps
+        #     mkdir -p /Applications/Nix\ Apps
+        #     find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+        #     while read src; do
+        #       app_name=$(basename "$src")
+        #       echo "copying $src" >&2
+        #       ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+        #     done
+        #   '';
+
+        # Customize Finder
+        system.defaults.finder._FXShowPosixPathInTitle = true; # Show full path in Finder title
+        system.defaults.finder.AppleShowAllExtensions = true; # Show all file extensions
+        system.defaults.finder.FXEnableExtensionChangeWarning = false; # Disable warning when changing file extension
+        system.defaults.finder.QuitMenuItem = true; # Enable quit menu item
+        system.defaults.finder.ShowStatusBar = true;
+        system.defaults.finder.ShowPathbar = true;
+
+        # Customize Dock
         system.defaults.dock.autohide = true;
+        system.defaults.dock.show-recents = false; # Disable recent apps
+
+        # Customize Keyboard
         system.defaults.NSGlobalDomain.InitialKeyRepeat = 15; # Short
         system.defaults.NSGlobalDomain.KeyRepeat = 2; # Fast
         system.keyboard.enableKeyMapping = true;
         system.keyboard.swapLeftCtrlAndFn = true;
+
+        # Customize OS
         time.timeZone = "America/Asuncion";
 
         # Auto upgrade nix package and the daemon service.
