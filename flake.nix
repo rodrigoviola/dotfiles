@@ -37,6 +37,7 @@
             "coreutils"
             "curl"
             "eksctl"
+            "entr"
             "eza"
             "fd"
             "fzf"
@@ -58,11 +59,11 @@
             "kustomize"
             "lazydocker"
             "lazygit"
+            "libpq" # PostgreSQL CLI tooling
             "neofetch"
             "neovim"
             "nmap"
             "oh-my-posh"
-            "openconnect"
             "p7zip"
             "pwgen"
             "ripgrep"
@@ -103,9 +104,9 @@
             "microsoft-remote-desktop"
             "notion"
             "raspberry-pi-imager"
+            "rectangle"
             "session-manager-plugin"
             "sparrow"
-            "spectacle"
             "spotify"
             "telegram"
             "the-unarchiver"
@@ -114,6 +115,7 @@
             "vmware-fusion"
             "whatsapp"
             # "mactex" Used for cv.pdf, to be replaced with xu-cheng/latex-docker            
+            # "cloudflare-warp"
           ];
 
           # masApps = {
