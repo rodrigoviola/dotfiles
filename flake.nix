@@ -34,6 +34,7 @@
             "aws-vault"
             "awscli"
             "bat"
+            "cmatrix"
             "coreutils"
             "curl"
             "eksctl"
@@ -114,8 +115,8 @@
             "visual-studio-code"
             "vmware-fusion"
             "whatsapp"
-            # "mactex" Used for cv.pdf, to be replaced with xu-cheng/latex-docker            
             # "cloudflare-warp"
+            # "mactex" Used for cv.pdf, to be replaced with xu-cheng/latex-docker            
           ];
 
           # masApps = {
